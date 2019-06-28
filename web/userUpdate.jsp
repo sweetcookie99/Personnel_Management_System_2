@@ -7,132 +7,154 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<style>
 
-    body,table{
-        font-size:20px;
-    }
-    table{
-        table-layout:fixed;
-        empty-cells:show;
-        border-collapse: collapse;
-        margin:0 auto;
-    }
-    td{
-        height:20px;
-    }
-    h1,h2,h3{
-        font-size:40px;
-        margin:0;
-        padding:0;
-    }
-
-    .title { background: #FFF; border: 1px solid #9DB3C5; padding: 1px; width:90%;margin:20px auto; }
-    .title h1 { line-height: 31px; text-align:center;  background: #2F589C url(th_bg2.gif); background-repeat: repeat-x; background-position: 0 0; color: #FFF; }
-    .title th, .title td { border: 1px solid #CAD9EA; padding: 5px; }
-
-
-    /*这个是借鉴一个论坛的样式*/
-    table.t1{
-        border:1px solid #cad9ea;
-        color:#666;
-    }
-    table.t1 th {
-        background-image: url(th_bg1.gif);
-        background-repeat::repeat-x;
-        height:30px;
-    }
-    table.t1 td,table.t1 th{
-        border:1px solid #cad9ea;
-        padding:0 1em 0;
-    }
-    table.t1 tr.a1{
-        background-color:#f5fafe;
-    }
-    .button {
-        display: inline-block;
-        padding: 10px 15px;
-        font-size: 24px;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        outline: none;
-        color: #fff;
-        background-color: #4CAF50;
-        border: none;
-        border-radius: 15px;
-        box-shadow: 0 9px #999;
-    }
-
-    .button:hover {background-color: #3e8e41}
-
-    .button:active {
-        background-color: #3e8e41;
-        box-shadow: 0 5px #666;
-        transform: translateY(4px);
-    }
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        border: 1px solid #e7e7e7;
-        background-color: #f3f3f3;
-    }
-
-    li {
-        float: left;
-    }
-
-    li a {
-        display: block;
-        color: #666;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-
-    li a:hover:not(.active) {
-        background-color: #ddd;
-    }
-
-    li a.active {
-        color: white;
-        background-color: #4CAF50;
-    }
-</style>
 <head>
     <title>Title</title>
+    <link href="css/demo.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <!--Framework-->
+    <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="js/jquery-ui.js" type="text/javascript"></script>
+    <!--End Framework-->
+    <script src="js/jquery.ffform.js" type="text/javascript"></script>
+    <script src="static/layui-v2.5.4/layui/layui.js"></script>
+    <link rel="stylesheet" href="static/layui-v2.5.4/layui/css/layui.css"/>
+    <link rel="stylesheet" href="static/layui-v2.5.4/layui/css/layui.mobile.css"/>
 </head>
-<body background="image/timg.jpg">
-<%
-    User user = (User) request.getAttribute("user");
-%>
-<form action="UserServlet?type=update" method="post">
-    <table width="40%"   border="3" class="t1">
-        <tr>
-            <th>管理员用户信息修改</th>
-        </tr>
-        <tr>
-            <th>Id:<input name="id" readonly value="<%=user.getId()%>" type="text"></th>
-        </tr>
-        <tr>
-            <th>登录名:<input name="loginName" value="<%=user.getLoginname()%>" type="text"></th>
-        </tr>
-        <tr>
-            <th>用户名:<input name="userName" value="<%=user.getUsername()%>" type="text"></th>
-        </tr>
-        <tr>
-            <th>创建时间:<input name="creatTime" readonly value="<%=user.getCreate_date()%>" type="text"></th>
-        </tr>
-        <tr>
-            <th>密码:<input name="password" value="<%=user.getPassword()%>" type="text"></th>
-        </tr>
-        <tr>
-            <td><input type="submit" value="提交"><input type="reset" value="重置"></td>
-        </tr>
-    </table>
-</form>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">LTWO人事管理系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">用户查询</a></li>
+            <li class="layui-nav-item"><a href="">公告发布</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    User
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退了</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="welcome.jsp">所有信息</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="DeptServlet?type=gotoList">部门信息</a></dd>
+                        <dd><a href="JobServlet?type=gotoList">职位信息</a></dd>
+                        <dd><a href="EmployeeServlet?type=gotoList">员工信息</a></dd>
+                        <dd><a href="UserServlet?type=gotoList">管理员信息</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+
+                </li>
+                <li class="layui-nav-item"><a href="">云市场</a></li>
+                <li class="layui-nav-item"><a href="">发布商品</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <%
+            User user = (User) request.getAttribute("user");
+        %>
+
+        <section id="getintouch" class="fadeIn animated">
+            <div class="container" style="border-bottom: 0;">
+                <h1>
+                    <span>管理员用户信息修改</span>
+                </h1>
+            </div>
+            <div class="container">
+                <form class="contact" action="UserServlet?type=update" method="post" id="form">
+                    <div class="row clearfix">
+                        <div class="lbl">
+                            <label for="name">
+                                Id</label>
+                        </div>
+                        <div class="ctrl">
+                            <input type="text" id="name" name="id" data-required="true" data-validation="text"
+                                   data-msg="Invalid Name" readonly value="<%=user.getId()%>" >
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="lbl">
+                            <label for="email">
+                               登录名</label>
+                        </div>
+                        <div class="ctrl">
+                            <input type="text" id="email" name="loginName" data-required="true" data-validation="email"
+                                   data-msg="Invalid E-Mail" placeholder="<%=user.getLoginname()%>" >
+                        </div>
+                    </div><br/>
+                    <div class="row clearfix">
+                        <div class="lbl">
+                            <label for="email">
+                                用户姓名</label>
+                        </div>
+                        <div class="ctrl">
+                            <input type="text" id="phone" name="userName" data-required="true" data-validation="custom"
+                                   data-msg="Invalid Phone #" placeholder="<%=user.getUsername()%>">
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="lbl">
+                            <label>
+                                登录密码</label>
+                        </div>
+                        <div class="ctrl">
+                            <input type="text" name="password"  placeholder="<%=user.getPassword()%>">
+                        </div>
+                    </div>
+                    <div class="row  clearfix">
+                        <div class="span10 offset2">
+                            <input type="submit" name="submit" id="submit" class="submit" value="提交">
+                            <input type="reset" name="submit" class="submit" value="重置">
+
+                            <form action="UserServlet?type=gotoList">
+                                <input type="submit" name="submit" class="submit" value="取消">
+                            </form>
+                        </div>
+                    </div>
+                </form>
+                <div id="validation">
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+
+        © layui.com - 底部固定区域
+    </div>
+</div>
+</body>
+
 
 </body>
 </html>

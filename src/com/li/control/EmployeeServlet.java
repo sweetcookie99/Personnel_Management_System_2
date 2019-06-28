@@ -21,7 +21,13 @@ public class EmployeeServlet extends HttpServlet {
         String type =request.getParameter("type");
         EmployeeService employeeService = new EmployeeService();
         if (type.equals("gotoList")){
+            int pageNum = 1;
+            if (request.getParameter("pageNum")!=null){
+                pageNum = Integer.parseInt(request.getParameter("pageNum"));
+            }
+            System.out.println(pageNum);
             List<Employee> allEmployee = employeeService.findAllEmployee();
+            request.setAttribute("pageNum",pageNum);
             request.setAttribute("allEmployee",allEmployee);
             request.getRequestDispatcher("employeeList.jsp").forward(request,response);
         }

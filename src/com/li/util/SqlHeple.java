@@ -13,7 +13,10 @@ public class SqlHeple {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             //开始获得连接
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/management?useSSL=false","root","123456");
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/management?useSSL=false",
+                    "root",
+                    "123456");
 
         } catch (Exception e) {
             e.printStackTrace();

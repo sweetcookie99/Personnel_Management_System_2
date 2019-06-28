@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.ref.ReferenceQueue;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", urlPatterns = "/UserServlet")
@@ -66,8 +67,16 @@ public class UserServlet extends HttpServlet {
 
         //去往管理员用户信息界面
         if (type.equals("gotoList")) {
+            int pageNum = 1;
+            if (request.getAttribute("pageNum")!=null){
+                pageNum = (int) request.getAttribute("pageNum");
+            }
+
             List<User> userList = userService.findAllUser();
             request.setAttribute("userList", userList);
+            request.setAttribute("pageNum",pageNum);
+            int total = userList.size();
+            int pageCount = (total-1)/5+1;
             request.getRequestDispatcher("userList.jsp").forward(request, response);
         }
 

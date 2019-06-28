@@ -12,106 +12,17 @@
     tbody {
         counter-reset:sectioncounter;
     }
-
     .SortCLASS:before {
         content:counter(sectioncounter);
         counter-increment:sectioncounter;
 
     }
-    body,table{
-        font-size:12px;
-    }
-    table{
-        table-layout:fixed;
-        empty-cells:show;
-        border-collapse: collapse;
-        margin:0 auto;
-    }
-    td{
-        height:20px;
-    }
-    h1,h2,h3{
-        font-size:12px;
-        margin:0;
-        padding:0;
-    }
-
-    .title { background: #FFF; border: 1px solid #9DB3C5; padding: 1px; width:90%;margin:20px auto; }
-    .title h1 { line-height: 31px; text-align:center;  background: #2F589C url(th_bg2.gif); background-repeat: repeat-x; background-position: 0 0; color: #FFF; }
-    .title th, .title td { border: 1px solid #CAD9EA; padding: 5px; }
-
-
-    /*这个是借鉴一个论坛的样式*/
-    table.t1{
-        border:1px solid #cad9ea;
-        color:#666;
-    }
-    table.t1 th {
-        background-image: url(th_bg1.gif);
-        background-repeat::repeat-x;
-        height:30px;
-    }
-    table.t1 td,table.t1 th{
-        border:1px solid #cad9ea;
-        padding:0 1em 0;
-    }
-    table.t1 tr.a1{
-        background-color:#f5fafe;
-    }
-    .button {
-        display: inline-block;
-        padding: 10px 15px;
-        font-size: 24px;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        outline: none;
-        color: #fff;
-        background-color: #4CAF50;
-        border: none;
-        border-radius: 15px;
-        box-shadow: 0 9px #999;
-    }
-
-    .button:hover {background-color: #3e8e41}
-
-    .button:active {
-        background-color: #3e8e41;
-        box-shadow: 0 5px #666;
-        transform: translateY(4px);
-    }
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        border: 1px solid #e7e7e7;
-        background-color: #f3f3f3;
-    }
-
-    li {
-        float: left;
-    }
-
-    li a {
-        display: block;
-        color: #666;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-
-    li a:hover:not(.active) {
-        background-color: #ddd;
-    }
-
-    li a.active {
-        color: white;
-        background-color: #4CAF50;
-    }
 </style>
 <head>
     <title>用户信息</title>
+    <script src="static/layui-v2.5.4/layui/layui.js"></script>
+    <link rel="stylesheet" href="static/layui-v2.5.4/layui/css/layui.css"/>
+    <link rel="stylesheet" href="static/layui-v2.5.4/layui/css/layui.mobile.css"/>
 </head>
 <script>
     function confirmOper(){
@@ -125,9 +36,154 @@
         }
     }
 </script>
-<body >
 
-<%--导航栏--%>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">LTWO人事管理系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">用户查询</a></li>
+            <li class="layui-nav-item"><a href="">公告发布</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    User
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退了</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="welcome.jsp">所有信息</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="DeptServlet?type=gotoList">部门信息</a></dd>
+                        <dd><a href="JobServlet?type=gotoList">职位信息</a></dd>
+                        <dd><a href="EmployeeServlet?type=gotoList">员工信息</a></dd>
+                        <dd><a href="UserServlet?type=gotoList">管理员信息</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+
+                </li>
+                <li class="layui-nav-item"><a href="">云市场</a></li>
+                <li class="layui-nav-item"><a href="">发布商品</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <h1 align="center" >管理员用户信息</h1>
+        <table  class="layui-table">
+            <thead>
+            <th >序号</th>
+            <th >员工Id</th>
+            <th >部门编号</th>
+            <th >职位编号</th>
+            <th >姓名</th>
+            <th >性别</th>
+            <th >手机号码</th>
+            <th >邮箱</th>
+            <th >学历</th>
+            <th >身份证号码</th>
+            <th >删除</th>
+            <th >编辑</th>
+            </thead>
+            <%
+                List<Employee> userList = (List<Employee>) request.getAttribute("allEmployee");
+                int pageSize = 8;
+                int pageNum = (int) request.getAttribute("pageNum");
+                int total = userList.size();
+                int pageCount = (total-1)/pageSize+1;
+                for (int i = pageSize*(pageNum-1);i<pageNum*pageSize;i++){
+                    Employee user = userList.get(i);
+                    if(i%2==0){
+            %>
+            <tr class="a1">
+                <td class="SortCLASS"></td>
+                <th><%=user.getId()%></th>
+                <th><%=user.getDeptId()%></th>
+                <th><%=user.getJobId()%></th>
+                <th><%=user.getName()%></th>
+                <th><%=user.getSex()%></th>
+                <th><%=user.getPhone()%></th>
+                <th><%=user.getEmail()%></th>
+                <th><%=user.getEducation()%></th>
+                <th><%=user.getCardId()%></th>
+                <th><a onclick="fn()" href="UserServlet?type=delete&id=<%=user.getId()%>">
+                    <i class="layui-icon layui-icon-delete" style="font-size: 25px"></i>
+                </a></th>
+                <th><a href="UserServlet?type=gotoUpdate&id=<%=user.getId()%>">
+                    <i class="layui-icon layui-icon-edit" style="font-size: 25px"></i>
+                </a></th>
+            </tr>
+            <%
+                }
+                if (i%2!=0){%>
+            <tr>
+                <td class="SortCLASS"></td>
+                <th><%=user.getId()%></th>
+                <th><%=user.getDeptId()%></th>
+                <th><%=user.getJobId()%></th>
+                <th><%=user.getName()%></th>
+                <th><%=user.getSex()%></th>
+                <th><%=user.getPhone()%></th>
+                <th><%=user.getEmail()%></th>
+                <th><%=user.getEducation()%></th>
+                <th><%=user.getCardId()%></th>
+                <th><a onclick="fn()" href="UserServlet?type=delete&id=<%=user.getId()%>">
+                    <i class="layui-icon layui-icon-delete" style="font-size: 25px"></i>
+                </a></th>
+                <th><a href="UserServlet?type=gotoUpdate&id=<%=user.getId()%>">
+                    <i class="layui-icon layui-icon-edit" style="font-size: 25px"></i>
+                </a></th>
+            </tr>
+            <%
+                    }
+                }
+            %>
+        </table>
+
+        <div align="center">
+             <%
+            for (int i=1;i<pageCount;i++)
+            {
+        %>
+            <a href="EmployeeServlet?type=gotoList&&pageNum=<%=i%>"><button class="layui-btn layui-btn-normal"><%=i%></button></a>
+            <%
+                }
+            %>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+</div>
+</body>
+<%--导航栏
 <ul>
     <li><a  href="welcome.jsp">主页</a></li>
     <li><a href="DeptServlet?type=gotoList">部门信息</a></li>
@@ -136,65 +192,8 @@
     <li><a href="#about">公告信息</a></li>
     <li><a href="UserServlet?type=gotoList">管理员用户信息</a></li>
 </ul>
-<%--表的正式部分--%>
+&lt;%&ndash;表的正式部分&ndash;%&gt;
 <h1 align="center" >管理员用户信息</h1>
-<table width="90%" id="mytab"  border="1" class="t1">
-    <thead>
-    <th width="3%">序号</th>
-    <th width="5%">员工Id</th>
-    <th width="5%">部门编号</th>
-    <th width="5%">职位编号</th>
-    <th width="5%">姓名</th>
-    <th width="5%">性别</th>
-    <th width="10%">手机号码</th>
-    <th width="10%">邮箱</th>
-    <th width="8%">学历</th>
-    <th width="10%">身份证号码</th>
-    <th width="5%">删除</th>
-    <th width="5%">修改</th>
-    </thead>
-    <%
-        List<Employee> userList = (List<Employee>) request.getAttribute("allEmployee");
-        for (int i = 0;i<userList.size();i++){
-            Employee user = userList.get(i);
-            if(i%2==0){
-    %>
-    <tr class="a1">
-        <td class="SortCLASS"></td>
-        <th><%=user.getId()%></th>
-        <th><%=user.getDeptId()%></th>
-        <th><%=user.getJobId()%></th>
-        <th><%=user.getName()%></th>
-        <th><%=user.getSex()%></th>
-        <th><%=user.getPhone()%></th>
-        <th><%=user.getEmail()%></th>
-        <th><%=user.getEducation()%></th>
-        <th><%=user.getCardId()%></th>
-        <th><a onclick="fn()" href="UserServlet?type=delete&id=<%=user.getId()%>">删除</a></th>
-        <th><a href="UserServlet?type=gotoUpdate&id=<%=user.getId()%>">修改</a></th>
-    </tr>
-    <%
-        }
-        if (i%2!=0){%>
-    <tr>
-        <td class="SortCLASS"></td>
-        <th><%=user.getId()%></th>
-        <th><%=user.getDeptId()%></th>
-        <th><%=user.getJobId()%></th>
-        <th><%=user.getName()%></th>
-        <th><%=user.getSex()%></th>
-        <th><%=user.getPhone()%></th>
-        <th><%=user.getEmail()%></th>
-        <th><%=user.getEducation()%></th>
-        <th><%=user.getCardId()%></th>
-        <th><a onclick="fn()" href="UserServlet?type=delete&id=<%=user.getId()%>">删除</a></th>
-        <th><a href="UserServlet?type=gotoUpdate&id=<%=user.getId()%>">修改</a></th>
-    </tr>
-    <%
-            }
-        }
-    %>
-</table>
 </br>
 <form action="userAdd.jsp">
     <div style="text-align: center">
@@ -208,5 +207,5 @@
 </form>
 
 
-</body>
+</body>--%>
 </html>
