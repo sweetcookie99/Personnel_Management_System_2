@@ -1,6 +1,7 @@
 package com.li.service;
 
 import com.li.entil.Dept;
+import com.li.entil.Employee;
 import com.li.entil.Job;
 import com.li.entil.User;
 import org.junit.Test;
@@ -13,8 +14,9 @@ public class UserServiceTest {
 
     @Test
     public void checklogin() {
-        JobService jobService = new JobService();
-        List<Job> allDept = jobService.findAllJob();
-        System.out.println(allDept);
+        EmployeeService employeeService = new EmployeeService();
+        employeeService.detleteEmployee(39);
+
+
     }
 }

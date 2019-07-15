@@ -68,11 +68,6 @@
                         <dd><a href="UserServlet?type=gotoList">管理员信息</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-
-                </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
             </ul>
         </div>
     </div>
@@ -154,11 +149,9 @@
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
+        © LTWO.com - 底部固定区域
     </div>
 </div>
 </body>
 
-
-</body>
 </html>

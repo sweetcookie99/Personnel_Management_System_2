@@ -59,5 +59,104 @@ public class JobService {
         }
         return list;
     }
-    //
+    //添加职位
+    public boolean addJob(Job job){
+        //取得连接
+        boolean b = true;
+        Connection conn = SqlHeple.getConnection();
+        String sql = "insert into job_inf values(?,?,?,?)";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,job.getId());
+            ps.setString(2,job.getDeptId());
+            ps.setString(3,job.getName());
+            ps.setString(4,job.getRemark());
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }finally {
+            try {
+                if(rs!=null){
+                rs.close();}
+                if (ps!=null){
+                ps.close();}
+                if (conn!=null){
+                conn.close();}
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return b;
+    }
+
+    //修改职位
+    public boolean updateJobById(Job job){
+        boolean b = true;
+        conn = SqlHeple.getConnection();
+        String sql = "update job_inf set name=?, remark=? where id=?";
+        try{
+            ps=conn.prepareStatement(sql);
+            ps.setString(1,job.getName());
+            ps.setString(2,job.getRemark());
+            ps.setString(3,job.getId());
+            int i = ps.executeUpdate();
+            if (i!=1){
+                b = false;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (rs!=null) {
+                    rs.close();
+                }
+                if (ps!=null) {
+                    ps.close();
+                }
+                if (conn!=null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return b;
+    }
+    
+    //删除职位信息
+    public boolean deleteJob(String id){
+        boolean b = true;
+        conn = SqlHeple.getConnection();
+        String sql = "delete from job_inf where id=?";
+        try{
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,id);
+            int i =ps.executeUpdate();
+            if(i!=1) {
+                b = false;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (rs!=null) {
+                    rs.close();
+                }
+                if (ps!=null) {
+                    ps.close();
+                }
+                if (conn!=null) {
+                    conn.close();
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return b;
+    }
 }

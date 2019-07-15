@@ -21,35 +21,34 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item"><a href="">控制台</a></li>
-            <li class="layui-nav-item"><a href="">用户查询</a></li>
-            <li class="layui-nav-item"><a href="">公告发布</a></li>
+            <li class="layui-nav-item"><a href="employeeSelect.jsp">用户查询</a></li>
+            <li class="layui-nav-item"><a href="NoticeServlet?type=gotoList">公告发布</a></li>
             <li class="layui-nav-item">
-                <a href="javascript:;">其它系统</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">邮件管理</a></dd>
-                    <dd><a href="">消息管理</a></dd>
-                    <dd><a href="">授权管理</a></dd>
-                </dl>
+                <a href="javascript:;">文件上传</a>
+
             </li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    User
+                   <%
+
+                       String uname = (String) session.getAttribute("uname");
+                   %>
+                    欢迎：<font color="#FF0000"><%=uname%></font>&nbsp;登录
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item"><a href="loginForm.jsp">退了</a></li>
         </ul>
     </div>
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="welcome.jsp">所有信息</a>
@@ -63,8 +62,8 @@
                 <li class="layui-nav-item">
 
                 </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
+                <li class="layui-nav-item"><a href="">百度</a></li>
+                <li class="layui-nav-item"><a href="">谷歌</a></li>
             </ul>
         </div>
     </div>
@@ -80,9 +79,9 @@
                 <div class="layui-timeline-content layui-text">
                     <h3 class="layui-timeline-title">7月3日</h3>
                     <p>
-                        7月3 LTWO人事管理系统的一切准备工作似乎都已到位一触即发。
+                        7月11LTWO人事管理系统的一切准备工作似乎都已到位一触即发。
                         <br>不枉近半个月日日夜夜与之为伴。因小而大。
-                        <br>无论它能过课设，抑或如何支撑？至少我曾为之努力过，无怨无悔 <i class="layui-icon"></i>
+                        <br>无论它能过课设，抑或如何支撑？<i class="layui-icon"></i>
                     </p>
                 </div>
             </li>
@@ -94,6 +93,7 @@
                     <ul>
                         <li>《登高》</li>
                         <li>《茅屋为秋风所破歌》</li>
+
                     </ul>
                 </div>
             </li>
@@ -156,7 +156,7 @@
             <li class="layui-timeline-item">
                 <i class="layui-icon layui-timeline-axis"></i>
                 <div class="layui-timeline-content layui-text">
-                    <div class="layui-timeline-title">5月10，LTWO人事管理demo 开始进行孵化</div>
+                    <div class="layui-timeline-title">5月10，LTWO人事管理demo 开始进行设想</div>
                 </div>
             </li>
             <li class="layui-timeline-item">

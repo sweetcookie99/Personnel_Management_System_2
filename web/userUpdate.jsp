@@ -31,19 +31,19 @@
             <li class="layui-nav-item"><a href="">用户查询</a></li>
             <li class="layui-nav-item"><a href="">公告发布</a></li>
             <li class="layui-nav-item">
-                <a href="javascript:;">其它系统</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">邮件管理</a></dd>
-                    <dd><a href="">消息管理</a></dd>
-                    <dd><a href="">授权管理</a></dd>
-                </dl>
+
             </li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    User
+                    <%
+
+                        String uname = (String) session.getAttribute("uname");
+                    %>
+                    欢迎：<font color="#FF0000"><%=uname%></font>&nbsp;登录
+                </a>
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
@@ -70,8 +70,7 @@
                 <li class="layui-nav-item">
 
                 </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
+
             </ul>
         </div>
     </div>
@@ -148,9 +147,6 @@
     </div>
 
     <div class="layui-footer">
-        <!-- 底部固定区域 -->
-
-        © layui.com - 底部固定区域
     </div>
 </div>
 </body>

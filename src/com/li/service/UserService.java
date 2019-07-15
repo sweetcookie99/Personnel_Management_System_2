@@ -200,8 +200,6 @@ public class UserService {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-
         }
         return b;
     }

@@ -6,7 +6,7 @@ package com.li.entil;
  * @Version 1.0
  *id | name | sex | phone | email | education | cred_id | job_id | dept_id | create_date |*/
 public class Employee {
-    private String id;
+    private int id;
     private String name;
     private String sex;
     private String phone;
@@ -16,12 +16,40 @@ public class Employee {
     private String jobId;
     private String deptId;
     private String createDate;
+    public Employee(){
 
-    public String getId() {
+    }
+
+    public Employee(String name, String sex, String phone,
+                    String email, String education, String cardId,
+                    String jobId, String deptId, String createDate) {
+        this.name = name;
+        this.sex = sex;
+        this.phone = phone;
+        this.email = email;
+        this.education = education;
+        this.cardId = cardId;
+        this.jobId = jobId;
+        this.deptId = deptId;
+        this.createDate = createDate;
+    }
+
+    public Employee(String name, String sex, String phone, String email, String education, String cardId, String jobId, String deptId) {
+        this.name = name;
+        this.sex = sex;
+        this.phone = phone;
+        this.email = email;
+        this.education = education;
+        this.cardId = cardId;
+        this.jobId = jobId;
+        this.deptId = deptId;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -95,5 +123,21 @@ public class Employee {
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", education='" + education + '\'' +
+                ", cardId='" + cardId + '\'' +
+                ", jobId='" + jobId + '\'' +
+                ", deptId='" + deptId + '\'' +
+                ", createDate='" + createDate + '\'' +
+                '}';
     }
 }

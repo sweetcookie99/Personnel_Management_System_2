@@ -68,10 +68,10 @@ public class UserServlet extends HttpServlet {
         //去往管理员用户信息界面
         if (type.equals("gotoList")) {
             int pageNum = 1;
-            if (request.getAttribute("pageNum")!=null){
+            /*if (request.getAttribute("pageNum")!=null){
                 pageNum = (int) request.getAttribute("pageNum");
             }
-
+*/
             List<User> userList = userService.findAllUser();
             request.setAttribute("userList", userList);
             request.setAttribute("pageNum",pageNum);

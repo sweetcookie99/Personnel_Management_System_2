@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "DeptServlet", urlPatterns = "/DeptServlet")
@@ -19,10 +18,22 @@ public class DeptServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         DeptService deptService = new DeptService();
         String type = request.getParameter("type");
+        /**
+         * 前往显示界面
+         */
         if (type.equals("gotoList")){
             List<Dept> allDept = deptService.findAllDept();
             request.setAttribute("allDept",allDept);
             request.getRequestDispatcher("deptList.jsp").forward(request,response);
+        }
+        //处理删除请求
+        if(type.equals("gotodelete")){
+            String id =request.getParameter("id");
+            boolean b = deptService.deleteDeptById(id);
+            if (b){
+                type = "gotoList";
+
+            }
         }
     }
 

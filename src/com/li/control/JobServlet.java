@@ -21,6 +21,9 @@ public class JobServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String type = request.getParameter("type");
         JobService jobService = new JobService();
+
+
+
         if (type.equals("gotoList")){
             List<Job> allJob = jobService.findAllJob();
             request.setAttribute("allJob",allJob);

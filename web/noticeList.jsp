@@ -1,12 +1,13 @@
-<%@ page import="com.li.entil.User" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.li.entil.Dept" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2019/5/15
-  Time: 18:56
+  Date: 2019/7/8
+  Time: 9:20
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="java.util.List" %>
+
+<%@ page import="com.li.entil.Notice" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <style>
@@ -20,20 +21,29 @@
     }
 </style>
 <head>
-    <title>Title</title>
+    <title>用户信息</title>
     <script src="static/layui-v2.5.4/layui/layui.js"></script>
     <link rel="stylesheet" href="static/layui-v2.5.4/layui/css/layui.css"/>
     <link rel="stylesheet" href="static/layui-v2.5.4/layui/css/layui.mobile.css"/>
 </head>
 <script>
-    function fn() {
-        if (confirm('确定要删除吗？')){
+    function confirmOper(){
+        window.onmessage('真的要删除该用户吗');
+    }
+    function fn(){
+        if(confirm("确定删除吗")){
+            location.href="";
+        }
+    }
+    function confirmAct()
+    {
+        if(confirm('确定要执行此操作吗?'))
+        {
             return true;
         }
         return false;
     }
 </script>
-<%--导航栏--%>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
@@ -43,8 +53,9 @@
             <li class="layui-nav-item"><a href="">控制台</a></li>
             <li class="layui-nav-item"><a href="">用户查询</a></li>
             <li class="layui-nav-item"><a href="">公告发布</a></li>
+            <li class="layui-nav-item"><a href="">文件上传</a></li>
             <li class="layui-nav-item">
-                <a href="javascript:">文件上传</a>
+
                 <dl class="layui-nav-child">
                     <dd><a href="">邮件管理</a></dd>
                     <dd><a href="">消息管理</a></dd>
@@ -60,7 +71,8 @@
 
                         String uname = (String) session.getAttribute("uname");
                     %>
-                    <%=uname%>
+                    欢迎：<font color="#FF0000"><%=uname%></font>&nbsp;登录
+                </a>
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
@@ -76,7 +88,7 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="welcome.jsp">所有信息</a>
+                    <a  href="welcome.jsp">所有信息</a>
                     <dl class="layui-nav-child">
                         <dd><a href="DeptServlet?type=gotoList">部门信息</a></dd>
                         <dd><a href="JobServlet?type=gotoList">职位信息</a></dd>
@@ -95,53 +107,46 @@
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <h1 align="center" >部门信息</h1>
-        <table class="layui-table" >
+        <div class="layui-row">
+            <div class="layui-col-md10">
+                <h1 align="center" >公告信息</h1>
+            </div>
+            <div class="layui-col-md2">
+                <a href="noticeAdd.jsp" class="layui-btn layui-btn-normal">发布新公告</a>
+            </div>
+        </div>
+        <table class="layui-table">
             <thead>
             <th >序号</th>
-            <th >部门Id</th>
-            <th >部门名称</th>
-            <th >部门详细信息</th>
+            <th >编号</th>
+            <th >标题</th>
+            <th >正文</th>
+            <th>发布日期</th>
+            <th>发布人</th>
             <th >删除</th>
             <th >修改</th>
             </thead>
             <%
-                List<Dept> list = (List<Dept>) request.getAttribute("allDept");
-                for (int i = 0;i<list.size();i++){
-                    Dept dept = list.get(i);
-                    if(i%2==0){
+                List<Notice> notices = (List<Notice>) request.getAttribute("allNotice");
+                for (int i = 0;i<notices.size();i++){
+                    Notice notice = notices.get(i);
             %>
             <tr class="a1">
                 <td class="SortCLASS"></td>
-                <th><%=dept.getId()%></th>
-                <th><%=dept.getName()%></th>
-                <th><%=dept.getRemark()%></th>
-                <th><a onclick="return fn();" href="UserServlet?type=delete&id=<%=dept.getId()%>">
-                    <i class="layui-icon layui-icon-delete" style="font-size: 25px"></i>
-                </a></th>
-                <th><a href="UserServlet?type=gotoUpdate&id=<%=dept.getId()%>">
+                <th><%=notice.getId()%></th>
+                <th><%=notice.getTitle()%></th>
+                <th><%=notice.getContext()%></th>
+                <th><%=notice.getCreateDate()%></th>
+                <th><%=notice.getUserId()%></th>
+                <th><a   href="?type=delete&id=<%=notice.getId()%>">
+                    <i class="layui-icon layui-icon-delete" style="font-size: 25px"></i></a></th>
+                <th><a href="NoticeServlet?type=gotoUpdate&id=<%=notice.getId()%>">
                     <i class="layui-icon layui-icon-edit" style="font-size: 25px;"></i>
                 </a></th>
-            </tr>
-            <%
-                }
-                if (i%2!=0){%>
-            <tr>
-                <td class="SortCLASS"></td>
-                <th><%=dept.getId()%></th>
-                <th><%=dept.getName()%></th>
-                <th><%=dept.getRemark()%></th>
-                <th><a onclick="return fn();" href="UserServlet?type=delete&id=<%=dept.getId()%>">
-                    <i class="layui-icon layui-icon-delete" style="font-size: 25px"></i>
-                </a></th>
-                <th><a href="UserServlet?type=gotoUpdate&id=<%=dept.getId()%>">
-                    <i class="layui-icon layui-icon-edit" style="font-size: 25px;"></i>
-                </a></th>
-            </tr>
             <%
                     }
-                }
             %>
+
         </table>
     </div>
 
@@ -151,14 +156,4 @@
     </div>
 </div>
 </body>
-
-<%--</br>
-<form action="userAdd.jsp">
-    <div style="text-align: center">
-        <button  type="submit" class="button">添加公司部门</button>
-    </div>
-</form>
-
-
-</body>--%>
 </html>

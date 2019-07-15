@@ -58,13 +58,100 @@ public class DeptService {
         return list;
     }
     //根据添加部门信息
-    public void insertDept(Dept dept) {
+    public boolean addDept(Dept dept) {
+        boolean b = true;
         conn = SqlHeple.getConnection();
-        String sql = "";
+        String sql = "insert into dept_inf values(?,?,?)";
         try {
-
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,dept.getId());
+            ps.setString(2,dept.getName());
+            ps.setString(3,dept.getRemark());
+            int i = ps.executeUpdate();
+            if (i!=1){
+                b = false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if(rs!=null){
+                    rs.close();}
+                if (ps!=null){
+                    ps.close();}
+                if (conn!=null){
+                    conn.close();}
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        return b;
+    }
+    //根据id更新部门信息
+    public boolean updateDept(Dept dept){
+        boolean b = true;
+        //获得连接
+        conn = SqlHeple.getConnection();
+        String sql = "update dept_inf set name=?,remark=? where id=?";
+        try{
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,dept.getName());
+            ps.setString(2,dept.getRemark());
+            ps.setString(3,dept.getId());
+            int i = ps.executeUpdate();
+            if (i!=1){
+                b = false;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (rs!=null) {
+                    rs.close();
+                }
+                if (ps!=null) {
+                    ps.close();
+                }
+                if (conn!=null) {
+                    conn.close();
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return b;
+    }
+    //删除部门信息
+    public boolean deleteDeptById(String id){
+        boolean b = true;
+        conn = SqlHeple.getConnection();
+        String sql = "delete from dept_inf where id=?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,id);
+            int i=ps.executeUpdate();
+            if (i!=1){
+                b = false;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }try {
+            if (rs!=null) {
+                rs.close();
+            }
+            if (ps!=null) {
+                ps.close();
+            }
+            if (conn!=null) {
+                conn.close();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return b;
     }
 }

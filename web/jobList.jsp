@@ -34,7 +34,7 @@
             <li class="layui-nav-item"><a href="">用户查询</a></li>
             <li class="layui-nav-item"><a href="">公告发布</a></li>
             <li class="layui-nav-item">
-                <a href="javascript:;">其它系统</a>
+                <a href="javascript:;">文件上传</a>
                 <dl class="layui-nav-child">
                     <dd><a href="">邮件管理</a></dd>
                     <dd><a href="">消息管理</a></dd>
@@ -73,14 +73,15 @@
                 <li class="layui-nav-item">
 
                 </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
+                <li class="layui-nav-item"><a href="">百度</a></li>
+                <li class="layui-nav-item"><a href="">谷歌</a></li>
             </ul>
         </div>
     </div>
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
+        <h1 align="center" >职位信息</h1>
         <table class="layui-table">
             <thead>
             <th >序号</th>
@@ -93,6 +94,10 @@
             </thead>
             <%
                 List<Job> list = (List<Job>) request.getAttribute("allJob");
+                int total = 0;
+                int pageCount = list.size();
+                int pageNum = 1;
+                int pageSize = 8;
                 for (int i = 0;i<list.size();i++){
                     Job job = list.get(i);
                     if(i%2==0){
@@ -103,7 +108,7 @@
                 <th><%=job.getDeptId()%></th>
                 <th><%=job.getName()%></th>
                 <th><%=job.getRemark()%></th>
-                <th><a onclick="fn()" href="UserServlet?type=delete&id=<%=job.getId()%>">
+                <th><a onclick="return fn()" href="JobServlet?type=gotodelete&id=<%=job.getId()%>">
                     <i class="layui-icon layui-icon-delete" style="font-size: 25px"></i>
                 </a></th>
                 <th><a href="UserServlet?type=gotoUpdate&id=<%=job.getId()%>">
@@ -119,7 +124,7 @@
                 <th><%=job.getDeptId()%></th>
                 <th><%=job.getName()%></th>
                 <th><%=job.getRemark()%></th>
-                <th><a onclick="fn()" href="UserServlet?type=delete&id=<%=job.getId()%>">
+                <th><a onclick="return fn()" href="JobServlet?type=gotodelete&id=<%=job.getId()%>">
                     <i class="layui-icon layui-icon-delete" style="font-size: 25px"></i>
                 </a></th>
                 <th><a href="UserServlet?type=gotoUpdate&id=<%=job.getId()%>">
@@ -131,15 +136,16 @@
                 }
             %>
         </table>
+        <%
+
+        %>
     </div>
 
     <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
     </div>
 </div>
 </body>
-<%--导航栏--%>
+<%--导航栏
 <ul>
     <li><a  href="welcome.jsp">主页</a></li>
     <li><a href="DeptServlet?type=gotoList">部门信息</a></li>
@@ -148,7 +154,7 @@
     <li><a href="#about">公告信息</a></li>
     <li><a href="UserServlet?type=gotoList">管理员用户信息</a></li>
 </ul>
-<%--表的正式部分--%>
+&lt;%&ndash;表的正式部分&ndash;%&gt;
 <h1 align="center" >职位信息</h1>
 
 </br>
@@ -159,5 +165,5 @@
 </form>
 
 
-</body>
+</body>--%>
 </html>
